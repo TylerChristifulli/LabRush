@@ -74,8 +74,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         gameState.activeCard = { element: card, category: category };
 
-        // Remove the card if no answer is chosen in time
-        setTimeout(() => {
+        // Ensure the card disappears after timeout if not clicked
+        gameState.cardTimeout = setTimeout(() => {
             if (gameState.activeCard && gameState.activeCard.element === card) {
                 missedCard();
             }
@@ -84,6 +84,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function checkAnswer(answer) {
         if (!gameState.activeCard) return;
+
+        clearTimeout(gameState.cardTimeout); // Prevents "Too Slow!" if they answer in time
 
         const card = gameState.activeCard.element;
         const correctCategory = gameState.activeCard.category;
