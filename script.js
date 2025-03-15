@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function missedCard() {
-        showFeedback('Too slow!', 'incorrect');
+        showFeedback('Too Slow!', 'incorrect');
         gameState.lives--;
         updateUI();
 
@@ -96,6 +96,8 @@ document.addEventListener('DOMContentLoaded', function () {
         feedback.textContent = message;
         feedback.className = `feedback ${type}`;
         feedback.style.opacity = 1;
+
+        // Ensure feedback does not overlap the lab card
         setTimeout(() => { feedback.style.opacity = 0; }, 1000);
     }
 });
