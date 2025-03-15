@@ -356,5 +356,3 @@
     // Initialize game
     init();
   </script>
-</body>
-</html>
