@@ -79,8 +79,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function missedCard() {
+        showFeedback('Too slow!', 'incorrect');
         gameState.lives--;
         updateUI();
+
         if (gameState.lives <= 0) {
             alert('Game Over!');
             gameState.isPlaying = false;
@@ -88,5 +90,12 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             spawnLabValue();
         }
+    }
+
+    function showFeedback(message, type) {
+        feedback.textContent = message;
+        feedback.className = `feedback ${type}`;
+        feedback.style.opacity = 1;
+        setTimeout(() => { feedback.style.opacity = 0; }, 1000);
     }
 });
