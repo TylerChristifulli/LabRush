@@ -8,7 +8,8 @@
 </head>
 <body>
     <div id="game-container">
-        <!-- Top Bar -->
+        
+        <!-- Top Bar (Level, Score, Lives) -->
         <div id="top-bar">
             <div id="level">Level: MIXED</div>
             <div id="score">Score: 0</div>
@@ -22,7 +23,7 @@
             <button id="start-btn">Start Game</button>
         </div>
 
-        <!-- Game Area -->
+        <!-- Game Area (Where Lab Cards Will Appear) -->
         <div id="game-area"></div>
 
         <!-- Feedback Message -->
@@ -34,6 +35,21 @@
             <button id="normal-btn" class="normal">NORMAL</button>
             <button id="high-btn" class="high">HIGH</button>
         </div>
+
+        <!-- Game Over Screen -->
+        <div id="game-over-screen">
+            <h1>Game Over!</h1>
+            <p id="final-score"></p>
+            <button id="restart-btn">Restart Game</button>
+        </div>
+
+        <!-- Level Complete Screen -->
+        <div id="level-complete-screen">
+            <h1>Level Complete!</h1>
+            <p id="level-score"></p>
+            <button id="next-level-btn">Next Level</button>
+        </div>
+
     </div>
 
     <script src="script.js"></script>
