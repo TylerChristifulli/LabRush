@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const lowBtn = document.getElementById('low-btn');
     const normalBtn = document.getElementById('normal-btn');
     const highBtn = document.getElementById('high-btn');
+    const restartBtn = document.getElementById('restart-btn');
 
+    // Lab Value Data
     const labDatabase = [
         { name: "Sodium", units: "mEq/L", min: 135, max: 145 },
         { name: "Potassium", units: "mEq/L", min: 3.5, max: 5.0 },
@@ -15,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
         { name: "Bicarbonate", units: "mEq/L", min: 22, max: 26 }
     ];
 
+    // Game State
     let gameState = {
         isPlaying: false,
         score: 0,
@@ -23,13 +26,12 @@ document.addEventListener('DOMContentLoaded', function () {
         activeCard: null
     };
 
-    startButton.addEventListener('click', function () {
-        startGame();
-    });
-
-    lowBtn.addEventListener('click', function () { checkAnswer('low'); });
-    normalBtn.addEventListener('click', function () { checkAnswer('normal'); });
-    highBtn.addEventListener('click', function () { checkAnswer('high'); });
+    // Event Listeners
+    startButton.addEventListener('click', startGame);
+    restartBtn.addEventListener('click', startGame);
+    lowBtn.addEventListener('click', () => checkAnswer('low'));
+    normalBtn.addEventListener('click', () => checkAnswer('normal'));
+    highBtn.addEventListener('click', () => checkAnswer('high'));
 
     function startGame() {
         gameState.isPlaying = true;
@@ -37,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
         gameState.lives = 3;
         updateUI();
         startButton.style.display = 'none';
+        document.getElementById('game-over-screen').style.display = 'none';
         spawnLabValue();
     }
 
@@ -71,11 +74,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
         gameState.activeCard = { element: card, category: category };
 
+        // Remove the card if no answer is chosen in time
         setTimeout(() => {
             if (gameState.activeCard && gameState.activeCard.element === card) {
                 missedCard();
             }
         }, gameState.speed);
+    }
+
+    function checkAnswer(answer) {
+        if (!gameState.activeCard) return;
+
+        const card = gameState.activeCard.element;
+        const correctCategory = gameState.activeCard.category;
+
+        if (answer === correctCategory) {
+            gameState.score += 10;
+            showFeedback('Correct!', 'correct');
+        } else {
+            gameState.lives--;
+            showFeedback('Incorrect!', 'incorrect');
+        }
+
+        updateUI();
+        card.remove();
+        gameState.activeCard = null;
+
+        if (gameState.lives <= 0) {
+            gameOver();
+        } else {
+            spawnLabValue();
+        }
     }
 
     function missedCard() {
@@ -84,9 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
         updateUI();
 
         if (gameState.lives <= 0) {
-            alert('Game Over!');
-            gameState.isPlaying = false;
-            startButton.style.display = 'block';
+            gameOver();
         } else {
             spawnLabValue();
         }
@@ -97,7 +124,11 @@ document.addEventListener('DOMContentLoaded', function () {
         feedback.className = `feedback ${type}`;
         feedback.style.opacity = 1;
 
-        // Ensure feedback does not overlap the lab card
         setTimeout(() => { feedback.style.opacity = 0; }, 1000);
+    }
+
+    function gameOver() {
+        gameState.isPlaying = false;
+        document.getElementById('game-over-screen').style.display = 'flex';
     }
 });
