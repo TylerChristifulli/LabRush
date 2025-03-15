@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Lab Value Rush - Simple</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    body { background-color: #f0f4f8; touch-action: manipulation; overflow: hidden; position: fixed; width: 100%; height: 100%; }
+    #game-container { position: relative; width: 100%; height: 100%; max-width: 500px; margin: 0 auto; background-color: white; overflow: hidden; }
+    #top-bar, #controls { display: flex; justify-content: space-between; align-items: center; background-color: #2b6cb0; color: white; padding: 10px; height: 50px; }
+    #game-area { position: relative; height: calc(100% - 100px); background-color: #ebf8ff; overflow: hidden; }
+    .control-btn { background-color: white; border: none; border-radius: 5px; padding: 8px 15px; font-weight: bold; font-size: 14px; cursor: pointer; }
+    .lab-card { position: absolute; width: 80%; max-width: 300px; padding: 15px; background-color: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); top: -150px; left: 50%; transform: translateX(-50%); text-align: center; }
+    .screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.95); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 100; padding: 20px; text-align: center; }
+    .feedback { position: absolute; top: 50%; left: 0; width: 100%; text-align: center; font-size: 24px; font-weight: bold; z-index: 50; opacity: 0; transform: translateY(-50%); transition: opacity 0.5s; }
+    #reference-btn, .btn { background-color: #3182ce; color: white; border: none; border-radius: 5px; padding: 12px 20px; font-size: 16px; margin-top: 15px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <div id="top-bar">
+      <div id="level">Level: BMP</div>
+      <div id="score">Score: 0</div>
+      <div id="lives">Lives: ❤️❤️❤️</div>
+    </div>
+    <div id="game-area">
+      <button id="reference-btn">?</button>
+      <div id="reference-box"></div>
+      <div id="feedback" class="feedback"></div>
+    </div>
+    <div id="controls">
+      <button id="low-btn" class="control-btn">LOW</button>
+      <button id="normal-btn" class="control-btn">NORMAL</button>
+      <button id="high-btn" class="control-btn">HIGH</button>
+    </div>
+    <div id="start-screen" class="screen">
+      <h1>Lab Value Rush</h1>
+      <p>Identify whether lab values are low, normal, or high!</p>
+      <button id="start-btn" class="btn">Start Game</button>
+    </div>
+    <div id="level-complete-screen" class="screen" style="display: none;">
+      <h1>Level Complete!</h1>
+      <div id="level-badge">Basic Metabolic Panel</div>
+      <p id="level-score">Level score: 0</p>
+      <p>Great job identifying those lab values!</p>
+      <button id="next-level-btn" class="btn">Next Level</button>
+    </div>
+    <div id="game-over-screen" class="screen" style="display: none;">
+      <h1>Game Over</h1>
+      <p id="final-score">Your score: 0</p>
+      <button id="restart-btn" class="btn">Play Again</button>
+    </div>
+  </div>
+</body>
+</html>
