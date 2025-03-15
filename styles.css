@@ -80,17 +80,7 @@ body, html {
     animation: slideDown 6s linear forwards;
 }
 
-/* Scrolling animation */
-@keyframes slideDown {
-    from {
-        top: -10%;
-    }
-    to {
-        top: 75%;
-    }
-}
-
-/* --- FEEDBACK DISPLAY (Fixed Above Lab Card) --- */
+/* Fixing "Too Slow!" Feedback Placement */
 #feedback {
     position: absolute;
     bottom: 60%; /* Moves feedback higher */
@@ -104,6 +94,16 @@ body, html {
     padding: 10px 15px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Scrolling animation */
+@keyframes slideDown {
+    from {
+        top: -10%;
+    }
+    to {
+        top: 75%;
+    }
 }
 
 /* Feedback Colors */
